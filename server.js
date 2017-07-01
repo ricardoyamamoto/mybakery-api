@@ -11,8 +11,8 @@ mongoose.connect('mongodb://localhost/myBakery');
 
 
 // Get our API routes
-const api = require('./src/server/routes/api');
-const user = require('./src/server/routes/user');
+const api = require('./src/routes/api');
+const user = require('./src/routes/user');
 
 const app = express();
 
