@@ -1,0 +1,29 @@
+{
+  "name": "mybakery-api",
+  "version": "1.0.0",
+  "description": "myBakery RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ricardoyamamoto/mybakery-api.git"
+  },
+  "keywords": [
+    "mybakery",
+    "restful",
+    "api"
+  ],
+  "author": "Ricardo Yamamoto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ricardoyamamoto/mybakery-api/issues"
+  },
+  "homepage": "https://github.com/ricardoyamamoto/mybakery-api#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "mongoose": "^4.11.0"
+  }
+}
