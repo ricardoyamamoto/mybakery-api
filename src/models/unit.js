@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 
 const unitSchema = new Schema({
-    unit: { type: String, required: true },
-    shortDescription: { type: String, required: true },
+    unit: { type: String, required: true, index: true },
+    shortDescription: { type: String, required: true }
 });
 
 

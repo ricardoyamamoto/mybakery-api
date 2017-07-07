@@ -1,14 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const recipeIngredientSchema = new Schema({
+    ingredient: { type: Schema.Types.ObjectId, ref: 'Ingredient', required: true, index: true },
+    quantity: { type: Number, required: true },
+    unit: { type: Schema.Types.ObjectId, ref: 'Unit', required: true }
+});
+
+
 const recipeSchema = new Schema({
-    title: { type: String, required: true },
-    category: { type: [Schema.Types.ObjectId], ref: 'Category', required: true },
+    title: { type: String, required: true, index: true },
+    category: { type: [Schema.Types.ObjectId], ref: 'Category', required: true, index: true },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     photo: { type: String, required: false },
     numberOfServings: { type: Number, required: true },
     preparationTime: { type: Number, required: true },
-    recipeIngredients: { type: [Schema.Types.ObjectId], ref: 'RecipeIngredient', required: true },
+    recipeIngredients: { type: [recipeIngredientSchema], required: true },
     price: { type: Number, required: false }
 });
 

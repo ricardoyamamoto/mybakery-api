@@ -37,6 +37,12 @@ class Facade {
       .remove(...args)
       .exec();
   }
+
+  insertMany(...args){
+    return this.Schema
+      .insertMany(...args);
+  }
+
 }
 
 module.exports = Facade;

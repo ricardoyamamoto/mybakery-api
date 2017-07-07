@@ -60,6 +60,14 @@ class Controller {
       })
       .catch(err => next(err));
   }
+
+  insertMany(req, res, next){
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      this.facade.insertMany(req.body)
+          .then(doc => res.status(201).json(doc))
+          .catch(err => next(err));
+  }
 }
 
 module.exports = Controller;
