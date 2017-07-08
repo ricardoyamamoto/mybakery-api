@@ -6,6 +6,7 @@ class Controller {
   create(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    console.log(req.body);
     this.facade.create(req.body)
       .then(doc => res.status(201).json(doc))
       .catch(err => next(err));

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 
+var cors = require('cors');
 
 mongoose.connect('mongodb://localhost/myBakery');
 
@@ -27,6 +28,21 @@ const app = express();
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+
+var originsWhitelist = [
+    'http://localhost:4200',      //this is my front-end url for development
+    'http://www.myproductionurl.com'
+];
+var corsOptions = {
+    origin: function(origin, callback){
+        var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+        callback(null, isWhitelisted);
+    },
+    credentials:true
+}
+//here is the magic
+app.use(cors(corsOptions));
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
