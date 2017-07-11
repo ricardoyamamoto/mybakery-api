@@ -21,6 +21,7 @@ const category = require('./src/routes/category');
 const functionality = require('./src/routes/functionality');
 const unit = require('./src/routes/unit');
 const userRole = require('./src/routes/user-role');
+const recipeSearch = require('./src/routes/recipe-search');
 
 
 const app = express();
@@ -57,6 +58,7 @@ app.use('/category',category);
 app.use('/functionality', functionality);
 app.use('/unit', unit);
 app.use('/user-role', userRole);
+app.use('/recipe-search', recipeSearch);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
