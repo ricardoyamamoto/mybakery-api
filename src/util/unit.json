@@ -1,0 +1,29 @@
+[{
+  "unit" : "g",
+  "shortDescription" : "grams"
+},
+  {
+    "unit" : "kg",
+    "shortDescription" : "kilograms"
+  },
+  {
+    "unit" : "mL",
+    "shortDescription" : "mililiters"
+  },
+  {
+    "unit" : "L",
+    "shortDescription" : "liters"
+  },
+  {
+    "unit" : "ea",
+    "shortDescription" : "each"
+  },
+  {
+    "unit" : "tbsp",
+    "shortDescription" : "table spoon"
+  },
+  {
+    "unit" : "cup",
+    "shortDescription" : "cup"
+  }
+]

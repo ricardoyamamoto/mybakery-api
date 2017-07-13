@@ -10,9 +10,9 @@ const userSchema = new Schema({
   email: { type: String, required: false, index: true },
   phone: { type: String, required: false, index: true },
   userId: { type: String, required: false, index: true },
-  password: { type: String, required: false}/*,
+  password: { type: String, required: false},
   status: { type: String, index: true },
-  userRole : { type: Schema.Types.ObjectId, ref: 'UserRole', required: false}*/
+  userRole : { type: Schema.Types.ObjectId, ref: 'UserRole', required: false}
 });
 
 

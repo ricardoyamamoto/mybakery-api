@@ -16,12 +16,15 @@ const api = require('./src/routes/api');
 const user = require('./src/routes/user');
 const recipe = require('./src/routes/recipe');
 const ingredient = require('./src/routes/ingredient');
-const recipeIngredient = require('./src/routes/recipe-ingredient');
 const category = require('./src/routes/category');
 const functionality = require('./src/routes/functionality');
 const unit = require('./src/routes/unit');
 const userRole = require('./src/routes/user-role');
 const recipeSearch = require('./src/routes/recipe-search');
+
+
+const initialLoad = require('./src/util/initial-load.router');
+
 
 
 const app = express();
@@ -53,12 +56,13 @@ app.use('/api', api);
 app.use('/user',user);
 app.use('/recipe',recipe);
 app.use('/ingredient',ingredient);
-app.use('/recipe-ingredient',recipeIngredient);
 app.use('/category',category);
 app.use('/functionality', functionality);
 app.use('/unit', unit);
 app.use('/user-role', userRole);
 app.use('/recipe-search', recipeSearch);
+
+app.use('/initial-load', initialLoad);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

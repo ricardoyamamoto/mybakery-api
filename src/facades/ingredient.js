@@ -7,6 +7,7 @@ class IngredientFacade extends Facade {
         return ingredientSchema
             .find(...args).populate('defaultUnit')
             .exec();
+
     }
 
     findById(...args) {
