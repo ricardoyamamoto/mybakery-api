@@ -10,7 +10,7 @@ const recipeIngredientSchema = new Schema({
 
 const recipeSchema = new Schema({
     title: { type: String, required: true, index: true },
-    category: { type: [Schema.Types.ObjectId], ref: 'Category', required: true, index: true },
+    category: [{ type: Schema.Types.ObjectId, ref: 'Category', required: true, index: true }],
     author: { type: Schema.Types.ObjectId, ref: 'User', required: false },
     photo: { type: String, required: false },
     numberOfServings: { type: Number, required: true },
