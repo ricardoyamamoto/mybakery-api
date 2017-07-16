@@ -21,11 +21,10 @@ const functionality = require('./src/routes/functionality');
 const unit = require('./src/routes/unit');
 const userRole = require('./src/routes/user-role');
 const recipeSearch = require('./src/routes/recipe-search');
+const ingredientSearch = require('./src/routes/ingredient-search');
 
 
 const initialLoad = require('./src/util/initial-load.router');
-
-
 
 const app = express();
 
@@ -61,6 +60,7 @@ app.use('/functionality', functionality);
 app.use('/unit', unit);
 app.use('/user-role', userRole);
 app.use('/recipe-search', recipeSearch);
+app.use('/ingredient-search', ingredientSearch);
 
 app.use('/initial-load', initialLoad);
 
