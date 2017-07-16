@@ -4,13 +4,13 @@ const recipeSchema = require('../models/recipe');
 class RecipeFacade extends Facade {
     find(...args) {
         return recipeSchema
-            .find(...args).populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+            .find(...args).populate('author category._id recipeIngredients.ingredient recipeIngredients.unit')
             .exec();
     }
 
     findById(...args) {
         return recipeSchema
-            .findById(...args).populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+            .findById(...args).populate('author category._id recipeIngredients.ingredient recipeIngredients.unit')
             .exec();
     }
 }
