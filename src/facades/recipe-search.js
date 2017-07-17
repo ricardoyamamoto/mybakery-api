@@ -16,22 +16,27 @@ class RecipeSearchFacade{
         if (args[0].q) {
             regExp1 = '.*' + args[0].q + '.*';
         }
+        else if (args[0].p) {
+            regExp1 = '.*' + args[0].p + '.*';
+        }
         // if (args[0].p) {
         //     searchObj.description = args[0].p;
         //     regExp2 = '.*' + searchObj.description + '.*';
         // }
-        if (args[0].sort) {
-            searchObj.sort = args[0].sort;
-        }
-        else
-        {
-            searchObj.sort = '';
-        }
 
         return this.Schema
-        .find({"title" : new RegExp(regExp1)})
-        .sort(searchObj.sort)
+        .find({title : new RegExp(regExp1)})
+        // .sort(searchObj.sort)
+        .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+        .sort({lastModified: -1})
         .exec();
+
+        // return this.Schema
+        // .find({category: { "$in" : ["596bcb014679593b4868ee85"]}})
+        // // .sort(searchObj.sort)
+        // .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+        // .sort({lastModified: -1})
+        // .exec();
     }
 }
 
