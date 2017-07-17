@@ -19,17 +19,11 @@ class IngredientSearchFacade{
         //     searchObj.description = args[0].p;
         //     regExp2 = '.*' + searchObj.description + '.*';
         // }
-        if (args[0].sort) {
-            searchObj.sort = args[0].sort;
-        }
-        else
-        {
-            searchObj.sort = '';
-        }
 
         return this.Schema
         .find({"name" : new RegExp(regExp1)})
-        .sort(searchObj.sort)
+        .populate('defaultUnit')
+        .sort({name: -1})
         .exec();
     }
 }
