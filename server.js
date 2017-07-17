@@ -21,7 +21,7 @@ const functionality = require('./src/routes/functionality');
 const unit = require('./src/routes/unit');
 const userRole = require('./src/routes/user-role');
 const recipeSearch = require('./src/routes/recipe-search');
-const categorySearch = require('./src/routes/category-search');
+const searchByCategory = require('./src/routes/search-by-category');
 
 
 const initialLoad = require('./src/util/initial-load.router');
@@ -62,7 +62,7 @@ app.use('/functionality', functionality);
 app.use('/unit', unit);
 app.use('/user-role', userRole);
 app.use('/recipe-search', recipeSearch);
-app.use('/category-search', categorySearch);
+app.use('/search-by-category', searchByCategory);
 
 app.use('/initial-load', initialLoad);
 

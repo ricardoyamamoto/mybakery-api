@@ -1,4 +1,4 @@
-const controller = require('../controllers/category-search');
+const controller = require('../controllers/search-by-category');
 const Router = require('express').Router;
 const router = new Router();
 
