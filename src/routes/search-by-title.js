@@ -1,4 +1,4 @@
-const controller = require('../controllers/recipe-search');
+const controller = require('../controllers/search-by-title');
 const Router = require('express').Router;
 const router = new Router();
 

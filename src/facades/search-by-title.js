@@ -1,7 +1,6 @@
-//const Facade = require('../lib/facade');
 const recipeSchema = require('../models/recipe');
 
-class RecipeSearchFacade{
+class SearchByTitleFacade{
     constructor(Schema) {
         this.Schema = Schema;
     }
@@ -25,4 +24,4 @@ class RecipeSearchFacade{
     }
 }
 
-module.exports = new RecipeSearchFacade(recipeSchema);
+module.exports = new SearchByTitleFacade(recipeSchema);
