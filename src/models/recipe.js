@@ -17,6 +17,7 @@ const recipeSchema = new Schema({
     preparationTime: { type: Number, required: true },
     recipeIngredients: { type: [recipeIngredientSchema], required: true },
     price: { type: Number, required: false },
+    description: { type: String, required: true},
     lastModified: { type: Date, required: true }
 });
 

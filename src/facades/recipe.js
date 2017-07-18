@@ -5,6 +5,7 @@ class RecipeFacade extends Facade {
     find(...args) {
         return recipeSchema
             .find(...args).populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+            .sort({lastModified: -1})
             .exec();
     }
 
