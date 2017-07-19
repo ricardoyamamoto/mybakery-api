@@ -5,6 +5,7 @@ class Facade {
 
   create(body) {
     const schema = new this.Schema(body);
+    console.log(body);
     return schema.save();
   }
 

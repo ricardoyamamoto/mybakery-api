@@ -15,6 +15,7 @@ const recipeSchema = new Schema({
     photo: { type: String, required: false },
     numberOfServings: { type: Number, required: true },
     preparationTime: { type: Number, required: true },
+    cookingTime: { type: Number, required: true},
     recipeIngredients: { type: [recipeIngredientSchema], required: true },
     price: { type: Number, required: false },
     description: { type: String, required: true},
