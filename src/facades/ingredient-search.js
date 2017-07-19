@@ -6,23 +6,24 @@ class IngredientSearchFacade{
     }
 
     find(...args) {
-        // console.log(args[0].q);
-        // console.log(args[0]);
-
-        var searchObj = {};
         var regExp1 = ''; // regExp2 = '';
+        //var perPage = 2;       
+        var page = 0;
+        
+        if (args[0].page)
+        {
+            page = Math.max(0, args[0].page);
+        }
 
         if (args[0].q) {
             regExp1 = '.*' + args[0].q + '.*';
         }
-        // if (args[0].p) {
-        //     searchObj.description = args[0].p;
-        //     regExp2 = '.*' + searchObj.description + '.*';
-        // }
 
         return this.Schema
-        .find({"name" : new RegExp(regExp1)})
+        .find({"name" : { $regex: new RegExp(regExp1, "i") }})       
         .populate('defaultUnit')
+        // .limit( perPage )
+        // .skip(perPage * page)
         .sort({name: -1})
         .exec();
     }
