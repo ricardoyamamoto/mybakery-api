@@ -12,11 +12,10 @@ class RecipeFacade extends Facade {
      }
 
     findById(...args) {
-    return
-    recipeSchema.findById(...args)
-    .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
-    .exec();
-}
+        return recipeSchema.findById(...args)
+            .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+            .exec().then();
+    }
 
 
 find(query, callback)
