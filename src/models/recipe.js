@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const paginator = require('mongoose-paginate');
+
 const Schema = mongoose.Schema;
 
 const recipeIngredientSchema = new Schema({
@@ -22,5 +24,5 @@ const recipeSchema = new Schema({
     lastModified: { type: Date, required: true }
 });
 
-
+recipeSchema.plugin(paginator);
 module.exports = mongoose.model('Recipe', recipeSchema);
