@@ -22,9 +22,11 @@
   },
   "homepage": "https://github.com/ricardoyamamoto/mybakery-api#readme",
   "dependencies": {
+    "async": "^2.5.0",
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
-    "mongoose": "^4.11.0"
+    "mongoose": "^4.11.0",
+    "mongoose-paginate": "^5.0.3"
   }
 }
