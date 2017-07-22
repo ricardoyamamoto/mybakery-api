@@ -6,6 +6,7 @@ class IngredientFacade extends Facade {
     find(...args) {
         return ingredientSchema
             .find(...args).populate('defaultUnit')
+            .sort({name: 1})
             .exec();
 
     }
