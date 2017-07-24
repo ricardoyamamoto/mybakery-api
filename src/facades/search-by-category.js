@@ -12,7 +12,7 @@ class SearchByCategoryFacade{
         if (args[0].q) {          
             param = args[0].q;
         }
-
+        console.log(param);
         return this.Schema
         .find({category : param})
         .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
