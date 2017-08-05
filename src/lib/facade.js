@@ -44,6 +44,12 @@ class Facade {
       .insertMany(...args);
   }
 
+  findOneAndUpdate(...args) {
+    return this.Schema
+        .findOneAndUpdate(...args)
+        .exec();;
+  }
+
 }
 
 module.exports = Facade;

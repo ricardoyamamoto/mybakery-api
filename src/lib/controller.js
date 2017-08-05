@@ -69,6 +69,14 @@ class Controller {
           .then(doc => res.status(201).json(doc))
           .catch(err => next(err));
   }
+
+  findOneAndUpdate(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      this.facade.findOneAndUpdate({ _id: req.params.id }, req.body, {upsert : true})
+          .then(doc => res.status(201).json(doc))
+          .catch(err => next(err));
+    }
 }
 
 module.exports = Controller;
