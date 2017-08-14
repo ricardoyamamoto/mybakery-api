@@ -24,6 +24,7 @@ const searchByTitle = require('./src/routes/search-by-title');
 const searchByCategory = require('./src/routes/search-by-category');
 const ingredientSearch = require('./src/routes/ingredient-search');
 const configuration = require('./src/routes/configuration');
+const conversionTable = require('./src/routes/conversion-table');
 
 
 const initialLoad = require('./src/util/initial-load.router');
@@ -67,6 +68,7 @@ app.use('/ingredient-search', ingredientSearch);
 
 app.use('/initial-load', initialLoad);
 app.use('/configuration', configuration);
+app.use('/conversion-table',conversionTable);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
