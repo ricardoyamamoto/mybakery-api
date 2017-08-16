@@ -47,7 +47,7 @@ class Facade {
   findOneAndUpdate(...args) {
     return this.Schema
         .findOneAndUpdate(...args)
-        .exec();;
+        .exec();
   }
 
 }
