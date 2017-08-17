@@ -11,7 +11,11 @@ class ConversionTableFacade extends Facade {
 
     findOneAndUpdate(){
         return conversionTableSchema
-            .findOneAndUpdate({ingredient: args[0]})
+            .findOneAndUpdate(
+                {_id: args[0]},
+                args[1],
+                {upsert: true}
+            )
     }
 }
 
