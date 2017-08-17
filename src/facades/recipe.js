@@ -3,6 +3,7 @@ const async = require('async');
 
 const recipeSchema = require('../models/recipe');
 const categorySchema = require('../models/category');
+const ingredientSchema = require('../models/ingredient');
 
 class RecipeFacade extends Facade {
      findOld(...args) {
@@ -21,80 +22,160 @@ class RecipeFacade extends Facade {
 
     find(query, callback)
     {
-        // collection allData =  recipeSchema
-        //     .find({})
-        //     .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
-        //     .sort({lastModified: -1})
-        //     .exec();
 
-        var findData = function (callback) {
-            async.parallel({
-                total: function (callback) {
-                    var queryItem = new RegExp('.*' + query.q.toLowerCase() + '.*')  || '.*';
-                    query.count = parseInt(query.count) || 10;
-                    query.skip = parseInt((query.page - 1) * query.count) || 0 ;
+        var findData =function (callback) {
+            var queryItem = new RegExp('.*' + query.q.toLowerCase() + '.*') || '.*';
 
-                    return recipeSchema
-                        .find({
-                            $or: [
-                                {title: queryItem},
-                                {description: queryItem}
-                            ]
+
+            async.waterfall([
+                function (callback) {
+                    async.parallel([
+                            function (callback) {
+                                return categorySchema
+                                    .findOne({name: queryItem})
+                                    .exec(function (err, category) {
+                                        if (err) {
+                                            callback(err, null)
+                                        }
+                                        else {
+                                            category==null?callback(null, '#$%^&*()'):callback(null, category._id);
+                                        }
+                                    });
+                            },
+                            function (callback) {
+                                return ingredientSchema
+                                    .findOne({name: queryItem})
+                                    .exec(function (err, ingredient) {
+                                        if (err) {
+                                            callback(err, null)
+                                        }
+                                        else {
+                                            ingredient==null?callback(null, '!@#$%^&*'):callback(null, ingredient._id);
+                                        }
+                                    });
+                            },
+                        ],
+                        function(err, results) {
+                            callback(null, results);
                         })
-                        .exec(function (err, doc) {
-                            if (err) {
-                                callback(err, null)
-                            }
-                            else {
-                                callback(null, doc.length);
-                            }
-                        });
                 },
-                items: function (callback) {
-                    // var queryItem = '.*';
-                    // if (query.q) {
-                    //     queryItem = new RegExp('.*' + query.q + '.*');
-                    // }
-                    //
-                    // if (query.count) {
-                    //     query.count = parseInt(query.count);
-                    // }
-                    // else {
-                    //     query.count = 10;
-                    // }
-                    // if (query.page) {
-                    //     query.skip = parseInt((query.page - 1) * query.count);
-                    // }
-                    // else {
-                    //     query.skip = 0;
-                    // }
-                    var queryItem = new RegExp('.*' + query.q.toLowerCase() + '.*')  || '.*';
-                    query.count = parseInt(query.count) || 10;
-                    query.skip = parseInt((query.page - 1) * query.count) || 0 ;
 
-                    return recipeSchema
-                        .find({
-                            $or: [
-                                {title: queryItem},
-                                {description: queryItem}
-                            ]
-                        }).populate('author category recipeIngredients.ingredient recipeIngredients.unit')
-                        .sort({lastModified: -1})
-                        .limit(query.count)
-                        .skip(query.skip)
-                        .exec(function (err, doc) {
-                            if (err) {
-                                callback(err, null)
-                            }
-                            else {
-                                callback(null, doc);
-                            }
-                        });
+                function (results, callback) {
+                    console.log(results);
+                    var categoryID = results[0];
+                    var ingredientID = results[1];
+                    console.log(categoryID);
+                    console.log(ingredientID);
+                    console.log(queryItem);
+                    async.parallel({
+                        total: function (callback) {
+                            return recipeSchema
+                                .find({
+                                    $or: [
+                                        {title: queryItem},
+                                        {description: queryItem},
+                                        {category: categoryID},
+                                        {recipeIngredients : {$elemMatch: {ingredient: ingredientID}}}
+                                    ]
+                                })
+                                .exec(function (err, doc) {
+                                    if (err) {
+                                        callback(err, null)
+                                    }
+                                    else {
+                                        callback(null, doc.length);
+                                    }
+                                });
+                        },
+                        items: function (callback) {
+                            query.count = parseInt(query.count) || 10;
+                            query.skip = parseInt((query.page - 1) * query.count) || 0;
+
+                            return recipeSchema
+                                .find({
+                                    $or: [
+                                        {title: queryItem},
+                                        {description: queryItem},
+                                        {category: categoryID},
+                                        {recipeIngredients : {$elemMatch: {ingredient: ingredientID}}}
+                                    ]
+                                })
+                                .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+                                .sort({lastModified: -1})
+                                .limit(query.count)
+                                .skip(query.skip)
+                                .exec(function (err, doc) {
+                                    if (err) {
+                                        callback(err, null)
+                                    }
+                                    else {
+                                        callback(null, doc);
+                                        console.log(doc);
+                                    }
+                                });
+                        }
+                    }, function (err, result) {
+                        callback(null,result);
+                    });
                 }
-            }, function (err, result) {
+            ], function (err, result) {
                 return callback(result);
             });
         }
+        // var findData = function (callback) {
+        //     async.parallel({
+        //         total: function (callback) {
+        //             var queryItem = new RegExp('.*' + query.q.toLowerCase() + '.*')  || '.*';
+        //             query.count = parseInt(query.count) || 10;
+        //             query.skip = parseInt((query.page - 1) * query.count) || 0 ;
+        //
+        //             return recipeSchema
+        //                 .find({
+        //                     $or: [
+        //                         {title: queryItem},
+        //                         {description: queryItem},
+        //                     ]
+        //                 })
+        //                 .exec(function (err, doc) {
+        //                     if (err) {
+        //                         callback(err, null)
+        //                     }
+        //                     else {
+        //                         callback(null, doc.length);
+        //                     }
+        //                 });
+        //         },
+        //         items: function (callback) {
+        //             var queryItem = new RegExp('.*' + query.q.toLowerCase() + '.*')  || '.*';
+        //             query.count = parseInt(query.count) || 10;
+        //             query.skip = parseInt((query.page - 1) * query.count) || 0 ;
+        //
+        //
+        //             return recipeSchema
+        //                 .find({
+        //                     $or: [
+        //                         {title: queryItem},
+        //                         {description: queryItem}
+        //                     ]
+        //                 })
+        //                 .populate('author category recipeIngredients.ingredient recipeIngredients.unit')
+        //                 .sort({lastModified: -1})
+        //                 .limit(query.count)
+        //                 .skip(query.skip)
+        //                 .exec(function (err, doc) {
+        //                     if (err) {
+        //                         callback(err, null)
+        //                     }
+        //                     else {
+        //                         callback(null, doc);
+        //                         console.log(doc);
+        //                     }
+        //                 });
+        //         }
+        //     }, function (err, result) {
+        //         return callback(result);
+        //     });
+        // }
 
         var findAllData = function (callback) {
             async.parallel({
