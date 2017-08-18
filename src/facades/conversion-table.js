@@ -9,6 +9,13 @@ class ConversionTableFacade extends Facade {
             .exec();
     }
 
+    find(...args) {
+        return conversionTableSchema
+            .find(args)
+            .populate({path: 'ingredient unit', populate:{path: 'defaultUnit'}})
+            .exec();
+    }
+
     findOneAndUpdate(){
         return conversionTableSchema
             .findOneAndUpdate(
