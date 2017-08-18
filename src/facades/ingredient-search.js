@@ -24,7 +24,7 @@ class IngredientSearchFacade{
         .populate('defaultUnit')
         // .limit( perPage )
         // .skip(perPage * page)
-        .sort({name: 1})
+        .sort({name: -1})
         .exec();
     }
 }

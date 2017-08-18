@@ -1,6 +1,5 @@
 const Facade = require('../lib/facade');
 const ingredientSchema = require('../models/ingredient');
-const recipeSchema = require('../models/recipe');
 
 class IngredientFacade extends Facade {
 
@@ -17,6 +16,7 @@ class IngredientFacade extends Facade {
             .findById(...args).populate('defaultUnit')
             .exec();
     }
+
 }
 
 module.exports = new IngredientFacade(ingredientSchema);

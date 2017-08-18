@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+var multer = require('multer');
 
 var mongoose = require('mongoose');
 
@@ -23,10 +24,8 @@ const userRole = require('./src/routes/user-role');
 const searchByTitle = require('./src/routes/search-by-title');
 const searchByCategory = require('./src/routes/search-by-category');
 const ingredientSearch = require('./src/routes/ingredient-search');
-const configuration = require('./src/routes/configuration');
-const conversionTable = require('./src/routes/conversion-table');
 
-const checkIngredientUse = require('./src/routes/check-ingredient-use.js');
+
 
 const initialLoad = require('./src/util/initial-load.router');
 
@@ -66,11 +65,8 @@ app.use('/user-role', userRole);
 app.use('/search-by-title', searchByTitle);
 app.use('/search-by-category', searchByCategory);
 app.use('/ingredient-search', ingredientSearch);
-app.use('/check-ingredient-use', checkIngredientUse);
 
 app.use('/initial-load', initialLoad);
-app.use('/configuration', configuration);
-app.use('/conversion-table',conversionTable);
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");

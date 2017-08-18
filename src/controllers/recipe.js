@@ -9,8 +9,8 @@ class RecipeController extends Controller {
     find(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            return this.facade.find(req.query, function(collection) {
-                res.status(200).json(collection);
+        return this.facade.find(req.query, function(collection) {
+                    res.status(200).json(collection);
             });
     }
 
